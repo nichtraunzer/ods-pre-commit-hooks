@@ -1,6 +1,7 @@
-#ods-pre-commit-hooks
+ods-pre-commit-hooks
+====================
 
-This repository provides pre-commit-hooks to support development of the opendevstack ecosystem.
+This repository provides pre-commit-hooks to support development of the opendevstack https://github.com/opendevstack ecosystem.
 
 
 ### Using terraformmoduleoutputs with pre-commit
