@@ -17,8 +17,9 @@ repos:
     - id: forbid-binary
 # TODO: activate in later release
 #    - id: rubocop
-    - id: script-must-have-extension
-    - id: script-must-not-have-extension
+# FIXME: doesn't work properly on NTFS managed shares.
+#    - id: script-must-have-extension
+#    - id: script-must-not-have-extension
     - id: shellcheck
 
 # TODO: activate in later release

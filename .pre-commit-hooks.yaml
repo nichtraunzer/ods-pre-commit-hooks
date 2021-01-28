@@ -4,10 +4,19 @@
 # for use by other git repos.
 
 - id: terraformmoduleoutputs
-  name: terraform module outpts
-  description: Add computed module outputs using terraform-config-inspect
+  name: terraform module outputs
+  description: Add computed module outputs using terraform-config-inspect.
   entry: hooks/createmoduleoutputs.rb
   language: ruby
+  pass_filenames: false
+  files: (\.tf|\.tfvars|\.tf\.json|\.tfvars\.json)$
+  exclude: \.terraform\/.*$
+
+- id: terraformcreatei2o
+  name: terraform module createi2o
+  description: Add module inputs as outputs to the module.
+  entry: hooks/createi2o.sh
+  language: script
   pass_filenames: false
   files: (\.tf|\.tfvars|\.tf\.json|\.tfvars\.json)$
   exclude: \.terraform\/.*$
