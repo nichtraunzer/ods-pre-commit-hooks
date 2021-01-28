@@ -4,8 +4,8 @@
 # Author: erhard.wais@boehringer-ingelheim.com
 #
 # This script creates terraform code required for the new testing strategy.
-# It parses the output from the command in CAPTUREFORM  and identfies which 
-# blueprints are used for development in order to build the required output 
+# It parses the output from the command in CAPTUREFORM  and identfies which
+# blueprints are used for development in order to build the required output
 # structure.
 # It creates the following files (based on current config)
 # - ./stackmodulesoutputs.tf
@@ -20,7 +20,7 @@ INSPECAWS        = ""
 INSPECAWSTAG     = ""
 CAPTUREFROMSTACK = 'terraform-config-inspect --json'
 ENVNAME          = 'KITCHEN_SUITE_NAME'
-OUTPUTSTF        = './stackmodulesoutputs.tf' 
+OUTPUTSTF        = './stackmodulesoutputs.tf'
 BANNER           = "# This file has been created automatically \n\n"
 BANNER2          = "name: stackdefault\n" + "supports:\n" + "  - platform: aws\n" + "depends:\n" + "  - name: inspec-aws\n" + "    git: https://github.com/inspec/inspec-aws\n" + "    tag: v1.33.0\n" + "# Begin - blueprint inspec profiles\n"
 
@@ -56,7 +56,7 @@ allModulesfixtures.each do |singleModule|
   fixturemodulename = singleModule[0]
 end
 
-# for each module 
+# for each module
 allModules.each do |singleModule|
 
   # get modulename and attributes
@@ -75,7 +75,7 @@ allModules.each do |singleModule|
 
 # create outputX.tf
  outputTF.write("output \"module_#{moduleOut.gsub(/-/,"_")}\" {\n")
- outputTF.write("  value       = module.#{moduleValue}\n}\n") 
+ outputTF.write("  value       = module.#{moduleValue}\n}\n")
 end
 
 # create moduleoutputs.tf
@@ -87,10 +87,10 @@ modoutTF.write("  value = module.#{fixturemodulename}.*\n}\n")
 
 uniqueBP.each do |name, count|
   duplicates   = Array.new
-  
+
   moduleNames.select { |k, v| v == name }.keys.each {|dup| duplicates << dup}
 
-  if count == 1 
+  if count == 1
     moduleValue = "module.#{fixturemodulename}.module_#{duplicates[0].gsub(/-/,"_")}.*"
     moduleV2    = "module.#{duplicates[0]}.*"
   else
@@ -109,7 +109,7 @@ uniqueBP.each do |name, count|
 
   # write stackmoduleoutputs.tf
   outputTF.write("output \"module_#{moduleOut.gsub(/-/,"_")}\" {\n")
-  outputTF.write("  value       = #{moduleV2}\n}\n") 
+  outputTF.write("  value       = #{moduleV2}\n}\n")
 
   # read the source/filename from the helper hash
   fileName  = moduleSources.select { |k, v| k == name }[name]
