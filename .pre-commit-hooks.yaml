@@ -6,8 +6,8 @@
 - id: terraformmoduleoutputs
   name: terraform module outputs
   description: Add computed module outputs using terraform-config-inspect.
-  entry: bundle exec ruby hooks/createmoduleoutputs.rb
-  language: system
+  entry: createmoduleoutputs.rb
+  language: ruby
   pass_filenames: false
   files: (\.tf|\.tfvars|\.tf\.json|\.tfvars\.json)$
   exclude: \.terraform\/.*$
