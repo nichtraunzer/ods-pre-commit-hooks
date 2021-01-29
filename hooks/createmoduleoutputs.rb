@@ -109,7 +109,7 @@ uniqueBP.each do |name, count|
 
   # write stackmoduleoutputs.tf
   outputTF.write("output \"module_#{moduleOut.gsub(/-/,"_")}\" {\n")
-  outputTF.write("  value       = #{moduleV2}\n}\n")
+  outputTF.write("  value = #{moduleV2}\n}\n")
 
   # read the source/filename from the helper hash
   fileName  = moduleSources.select { |k, v| k == name }[name]
@@ -143,3 +143,7 @@ outputTF.close unless outputTF.nil?
 modoutTF.close unless modoutTF.nil?
 allBPsRB.close unless allBPsRB.nil?
 inspecYML.close unless allBPsRB.nil?
+
+# pretty format modified tf files, so that a cyclic execution of terraform fmt is prohibited.
+TFFMT = "terraform fmt #{OUTPUTSTF} ./test/fixtures/#{myEnv}/moduleoutputs.tf"
+stdouttffmt, stderrtffmt, statustffmt = Open3.capture3(TFFMT)
