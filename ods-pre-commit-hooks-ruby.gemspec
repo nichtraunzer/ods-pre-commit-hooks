@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.authors = ["Josef Hartmann / Erhard Wais"]
   s.email = %q{dontneedmoreemail@domain.com}
   s.files = Dir["./hooks/*.rb"]
+  s.bindir = 'hooks'
   s.executables   = s.files.grep(%r{^./hooks/}) { |f| File.basename(f) }
   s.require_paths    = ["hooks"]
   s.extra_rdoc_files = ["README.md"]
