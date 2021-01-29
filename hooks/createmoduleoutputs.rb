@@ -21,7 +21,7 @@ INSPECAWSTAG     = ""
 CAPTUREFROMSTACK = 'terraform-config-inspect --json'
 ENVNAME          = 'KITCHEN_SUITE_NAME'
 OUTPUTSTF        = './stackmodulesoutputs.tf'
-BANNER           = "# This file has been created automatically \n\n"
+BANNER           = "# This file has been created automatically.\n\n"
 BANNER2          = "name: stackdefault\n" + "supports:\n" + "  - platform: aws\n" + "depends:\n" + "  - name: inspec-aws\n" + "    git: https://github.com/inspec/inspec-aws\n" + "    tag: v1.33.0\n" + "# Begin - blueprint inspec profiles\n"
 
 stdout, stderr, status = Open3.capture3(CAPTUREFROMSTACK)
