@@ -75,7 +75,7 @@ allModules.each do |singleModule|
 
 # create outputX.tf
  outputTF.write("output \"module_#{moduleOut.gsub(/-/,"_")}\" {\n")
- outputTF.write("  value       = module.#{moduleValue}\n}\n")
+ outputTF.write("  value = module.#{moduleValue}\n}\n")
 end
 
 # create moduleoutputs.tf
@@ -145,7 +145,7 @@ allBPsRB.close unless allBPsRB.nil?
 inspecYML.close unless allBPsRB.nil?
 
 # pretty format modified tf files, so that a cyclic execution of terraform fmt is prohibited.
-TFFMT = "terraform fmt #{OUTPUTSTF} ./test/fixtures/#{myEnv}/moduleoutputs.tf"
+TFFMT = "terraform fmt"
 stdouttffmt, stderrtffmt, statustffmt = Open3.capture3(TFFMT)
 pp stdouttffmt
 pp stderrtffmt
