@@ -147,3 +147,6 @@ inspecYML.close unless allBPsRB.nil?
 # pretty format modified tf files, so that a cyclic execution of terraform fmt is prohibited.
 TFFMT = "terraform fmt #{OUTPUTSTF} ./test/fixtures/#{myEnv}/moduleoutputs.tf"
 stdouttffmt, stderrtffmt, statustffmt = Open3.capture3(TFFMT)
+pp stdouttffmt
+pp stderrtffmt
+pp statustffmt
