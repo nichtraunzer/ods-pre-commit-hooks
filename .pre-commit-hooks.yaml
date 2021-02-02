@@ -20,3 +20,12 @@
   pass_filenames: false
   files: (\.tf|\.tfvars|\.tf\.json|\.tfvars\.json)$
   exclude: \.terraform\/.*$
+
+- id: terraformcreatebpmoduleoutputs
+  name: terraform blueprint module outputs
+  description: Add computed blueprint module outputs using terraform-config-inspect.
+  entry: hooks/createbpmoduleoutputs.sh
+  language: script
+  pass_filenames: false
+  files: (\.tf|\.tfvars|\.tf\.json|\.tfvars\.json)$
+  exclude: \.terraform\/.*$
