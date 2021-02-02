@@ -21,6 +21,7 @@ repos:
 #    - id: script-must-have-extension
 #    - id: script-must-not-have-extension
     - id: shellcheck
+      additional_dependencies: []
 
 # TODO: activate in later release
 #  - repo: https://github.com/pre-commit/mirrors-ruby-lint
