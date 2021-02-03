@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# createmoduleoutputs.rb
+# createstackmoduleoutputs.rb
 # Author: erhard.wais@boehringer-ingelheim.com
 #
 # This script creates terraform code required for the new testing strategy.
