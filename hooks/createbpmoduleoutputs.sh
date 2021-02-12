@@ -16,7 +16,7 @@ if [ "x${KITCHEN_SUITE_NAME}" == "x" ]; then
   KITCHEN_SUITE_NAME="default"
 fi
 
-CWD="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd -P)"
+CWD="$(pwd -P)"
 TFMFILE=${CWD}/test/fixtures/${KITCHEN_SUITE_NAME}/moduleoutputs.tf
 
 BPNAME=$( echo "${CWD}" | sed 's/.*\/\(blue.*\)/\1/g' | sed 's/-/_/g' )
