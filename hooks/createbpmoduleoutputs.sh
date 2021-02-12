@@ -11,33 +11,44 @@
 set -e
 set -o pipefail
 
-if [ "x${KITCHEN_SUITE_NAME}" == "x" ]; then
-  echo "Not running within kitchen using default."
-  KITCHEN_SUITE_NAME="default"
-fi
-
 CWD="$(pwd -P)"
-TFMFILE=${CWD}/test/fixtures/${KITCHEN_SUITE_NAME}/moduleoutputs.tf
-
 BPNAME=$( echo "${CWD}" | sed 's/.*\/\(blue.*\)/\1/g' | sed 's/-/_/g' )
 
-pushd . > /dev/null
+if [ "x${KITCHEN_SUITE_NAME}" == "x" ]; then
+  echo "Not running within kitchen updating all test/fixtures."
+  #KITCHEN_SUITE_NAME="default"
+  FIXTURE_DIRS="$(ls -d ./test/fixtures/*)"
+else
+  echo "Running within kitchen suite ${KITCHEN_SUITE_NAME}."
+  FIXTURE_DIRS="./test/fixtures/${KITCHEN_SUITE_NAME}"
+fi
 
-cd "${CWD}"/test/fixtures/${KITCHEN_SUITE_NAME}
+for adir in ${FIXTURE_DIRS} ; do
+  echo "Processing fixture ${adir}"
 
-# Only select the blueprint name which refers to the module in ../../..
-MODULE_NAMES=$(terraform-config-inspect . --json| jq -r '.module_calls|.[]|select(.source=="../../..")|.name')
+  TFMFILE=${CWD}/${adir}/moduleoutputs.tf
 
-echo "# file created automatically" > "${TFMFILE}"
+  pushd . > /dev/null
 
-#for modules in $(terraform-config-inspect . --json| jq -r '.module_calls|keys[]') ; do
-for imodule in ${MODULE_NAMES} ; do
-  cat >> "${TFMFILE}" <<EOF
+  cd "${CWD}/${adir}"
+
+  # Only select the blueprint name which refers to the module in ../../..
+  MODULE_NAMES=$(terraform-config-inspect . --json| jq -r '.module_calls|.[]|select(.source=="../../..")|.name')
+
+  echo "# file created automatically" > "${TFMFILE}"
+
+  #for modules in $(terraform-config-inspect . --json| jq -r '.module_calls|keys[]') ; do
+
+  for imodule in ${MODULE_NAMES} ; do
+    cat >> "${TFMFILE}" <<EOF
 output "module_${BPNAME}" {
   description = "Module outputs created within the test-fixture passing outputs of the module in-test."
   value       = module.${imodule}.*
 }
 EOF
-done
+  terraform fmt "${CWD}/${adir}"
+  done
 
-popd > /dev/null
+  popd > /dev/null
+
+done
