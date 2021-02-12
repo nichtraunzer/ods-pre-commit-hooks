@@ -4,7 +4,7 @@
 # for use by other git repos.
 
 - id: terraformstackmoduleoutputs
-  name: terraform stack modules outputs
+  name: Create terraform stack modules outputs
   description: Add computed module outputs using terraform-config-inspect to a stack.
   entry: createstackmoduleoutputs.rb
   language: ruby
@@ -13,7 +13,7 @@
   exclude: \.terraform\/.*$
 
 - id: terraformcreatei2o
-  name: terraform module createi2o
+  name: Create terraform module inputs2outputs
   description: Add module inputs as outputs to the module.
   entry: hooks/createi2o.sh
   language: script
@@ -22,7 +22,7 @@
   exclude: \.terraform\/.*$
 
 - id: terraformcreatebpmoduleoutputs
-  name: terraform blueprint module outputs
+  name: Create terraform blueprint fixture module outputs
   description: Add computed blueprint module outputs using terraform-config-inspect.
   entry: hooks/createbpmoduleoutputs.sh
   language: script
