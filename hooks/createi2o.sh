@@ -18,7 +18,7 @@ set -o pipefail
 
 indenttfo() { sed 's/^/          /'; }
 
-CWD="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd -P)"
+CWD="$(pwd -P)"
 TFHFILE=${CWD}/inputs2outputs.tf
 
 if [ -f "${TFHFILE}" ] ; then
@@ -35,4 +35,4 @@ ${TFDOCSHCL}
   }]
 }
 EOF
-terraform fmt "${TFHFILE}"
+terraform fmt "${CWD}"
