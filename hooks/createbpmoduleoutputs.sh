@@ -35,7 +35,7 @@ for adir in ${FIXTURE_DIRS} ; do
   # Only select the blueprint name which refers to the module in ../../..
   MODULE_NAMES=$(terraform-config-inspect . --json| jq -r '.module_calls|.[]|select(.source=="../../..")|.name')
 
-  echo "# file created automatically" > "${TFMFILE}"
+  printf "# This file has been created automatically.\n\n" > "${TFMFILE}"
 
   #for modules in $(terraform-config-inspect . --json| jq -r '.module_calls|keys[]') ; do
 

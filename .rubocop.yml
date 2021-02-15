@@ -1,0 +1,27 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  NewCops: enable
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*"
+Naming/ClassAndModuleCamelCase:
+  Description: Use CamelCase for classes and modules.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#camelcase-classes
+  Enabled: true
+Naming/MethodName:
+  Description: Use the configured style when naming methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-symbols-methods-vars
+  Enabled: true
+  EnforcedStyle: camelCase
+  SupportedStyles:
+  - snake_case
+  - camelCase
+Naming/VariableName:
+  Description: Use the configured style when naming variables.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-symbols-methods-vars
+  Enabled: true
+  EnforcedStyle: camelCase
+  SupportedStyles:
+  - snake_case
+  - camelCase
