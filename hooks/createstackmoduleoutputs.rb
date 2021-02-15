@@ -18,11 +18,12 @@
 require 'json'
 require 'open3'
 
-CAPTUREFROMSTACK = 'terraform-config-inspect --json'
-ENVNAME          = 'KITCHEN_SUITE_NAME'
-OUTPUTSTF        = './stackmodulesoutputs.tf'
-BANNER           = "# This file has been created automatically.\n\n"
-INSPEC_YMLHEAD   = <<~MYYML
+CAPTUREFROMSTACK  = 'terraform-config-inspect --json'
+ENVNAME           = 'KITCHEN_SUITE_NAME'
+OUTPUTSTF         = './stackmodulesoutputs.tf'
+BANNER            = "# This file has been created automatically.\n\n"
+INSPECYMLTMPLFILE = './test/integration/default/inspec.yml.tmpl'
+INSPECYMLTMPLSTR  = <<~MYYML
     ---
     name: stackdefault
     supports:
@@ -31,9 +32,13 @@ INSPEC_YMLHEAD   = <<~MYYML
       - name: inspec-aws
         git: https://github.com/inspec/inspec-aws
         tag: v1.33.0
-    # Begin - blueprint inspec profiles
-  #{'  '}
 MYYML
+
+INSPECYMLHEAD = if File.exist?(INSPECYMLTMPLFILE)
+                  File.read(INSPECYMLTMPLFILE)
+                else
+                  INSPECYMLTMPLSTR
+                end
 
 stdout, _stderr, _status = Open3.capture3(CAPTUREFROMSTACK)
 
@@ -56,7 +61,7 @@ outputTF.write(BANNER)
 modoutTF.write(BANNER)
 allBPsRB.write(BANNER)
 inspecYML.write(BANNER)
-inspecYML.write(INSPEC_YMLHEAD)
+inspecYML.write(INSPECYMLHEAD)
 
 # get module section from main.json
 allModules = JSON.parse(stdout)['module_calls']
