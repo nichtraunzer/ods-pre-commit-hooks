@@ -21,6 +21,15 @@
   files: (\.tf|\.tfvars|\.tf\.json|\.tfvars\.json)$
   exclude: \.terraform\/.*$
 
+- id: terraformcreatel2o
+  name: Create terraform module locals2outputs
+  description: Add module locals as outputs to the module.
+  entry: hooks/createl2o.sh
+  language: script
+  pass_filenames: false
+  files: (main.tf)$
+  exclude: \.terraform\/.*$
+
 - id: terraformcreatebpmoduleoutputs
   name: Create terraform blueprint fixture module outputs
   description: Add computed blueprint module outputs using terraform-config-inspect.
