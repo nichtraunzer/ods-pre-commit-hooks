@@ -24,14 +24,14 @@ OUTPUTSTF         = './stackmodulesoutputs.tf'
 BANNER            = "# This file has been created automatically.\n\n"
 INSPECYMLTMPLFILE = './test/integration/default/inspec.yml.tmpl'
 INSPECYMLTMPLSTR  = <<~MYYML
-    ---
-    name: stackdefault
-    supports:
-      - platform: aws
-    depends:
-      - name: inspec-aws
-        git: https://github.com/inspec/inspec-aws
-        tag: v1.33.0
+  ---
+  name: stackdefault
+  supports:
+    - platform: aws
+  depends:
+    - name: inspec-aws
+      git: https://github.com/inspec/inspec-aws
+      tag: v1.33.0
 MYYML
 
 INSPECYMLHEAD = if File.exist?(INSPECYMLTMPLFILE)
@@ -51,7 +51,14 @@ CAPTUREFROMFIXTURE = "terraform-config-inspect ./test/fixtures/#{myEnv} --json"
 
 stdoutfixture, _stderrfixture, _statusfixture = Open3.capture3(CAPTUREFROMFIXTURE)
 
-stackName   = File.basename(Dir.getwd)
+CAPTUREFROMGIT = "basename $(git remote get-url origin) .git"
+stdoutgit, _stderrgit, _statusgit = Open3.capture3(CAPTUREFROMGIT)
+if _statusgit.success?
+  stackName = stdoutgit.strip
+else
+  stackName   = File.basename(Dir.getwd)
+end
+
 outputTF    = File.open(OUTPUTSTF, 'w')
 modoutTF    = File.open("./test/fixtures/#{myEnv}/moduleoutputs.tf", 'w')
 allBPsRB    = File.open("./test/integration/#{myEnv}/controls/blueprints.rb", 'w')
