@@ -36,7 +36,7 @@ for adir in ${FIXTURE_DIRS} ; do
   cd "${CWD}/${adir}"
 
   # Only select the blueprint name which refers to the module in ../../..
-  MODULE_NAMES=$(terraform-config-inspect . --json | jq -r '.module_calls|.[]|select(.source=="../../..")|.name')
+  MODULE_NAMES=$(terraform-config-inspect . --json | jq -r '.module_calls|.[]|select((.source=="../../..") or (.source=="../../../"))|.name')
 
   printf "# This file has been created automatically.\n\n" > "${TFMFILE}"
 
