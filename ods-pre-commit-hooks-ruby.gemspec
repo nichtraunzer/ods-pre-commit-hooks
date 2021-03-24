@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.required_ruby_version = '~> 2.6'
   s.name = 'ods-pre-commit-hooks-ruby'
-  s.version = '0.0.3'
+  s.version = '0.0.4'
 
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
   s.authors = ['Josef Hartmann / Erhard Wais']
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.7'
   s.license = 'Apache-2.0'
   s.summary = 'ruby pre-commit hooks for the ods ecosystem.'
-  s.description = 'A git pre-commit hook written in ruby.'
+  s.description = 'A git pre-commit hook written in ruby supporting ods-quickstarters repo.'
   s.requirements = ['json', 'open3']
 
   s.add_development_dependency('benchmark-ips', '~> 0.1')
