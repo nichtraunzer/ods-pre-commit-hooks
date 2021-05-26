@@ -172,3 +172,9 @@ stdouttffmt, stderrtffmt, statustffmt = Open3.capture3(TFFMT)
 pp stdouttffmt
 pp stderrtffmt
 pp statustffmt
+
+TFFMTFIXTURES = "terraform fmt ./test/fixtures/#{myEnv}"
+stdouttffmtfixtures, stderrtffmtfixtures, statustffmtfixtures = Open3.capture3(TFFMTFIXTURES)
+pp stdouttffmtfixtures
+pp stderrtffmtfixtures
+pp statustffmtfixtures
