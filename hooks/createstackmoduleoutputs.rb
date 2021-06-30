@@ -25,13 +25,13 @@ BANNER            = "# This file has been created automatically.\n\n"
 INSPECYMLTMPLFILE = './test/integration/default/inspec.yml.tmpl'
 INSPECYMLTMPLSTR  = <<~MYYML
   ---
-  name: stackdefault
+  name: stack
   supports:
     - platform: aws
   depends:
     - name: inspec-aws
       git: https://github.com/inspec/inspec-aws
-      tag: v1.33.0
+      tag: v1.50.5
 MYYML
 
 INSPECYMLHEAD = if File.exist?(INSPECYMLTMPLFILE)
