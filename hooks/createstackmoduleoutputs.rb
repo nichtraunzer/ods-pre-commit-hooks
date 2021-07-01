@@ -22,7 +22,7 @@ CAPTUREFROMSTACK  = 'terraform-config-inspect --json'
 ENVNAME           = 'KITCHEN_SUITE_NAME'
 OUTPUTSTF         = './stackmodulesoutputs.tf'
 BANNER            = "# This file has been created automatically.\n\n"
-BANNERRB          = "# This file has been created automatically."
+BANNERRB          = "# This file has been created automatically.\n"
 INSPECYMLTMPLFILE = './test/integration/default/inspec.yml.tmpl'
 INSPECYMLTMPLSTR  = <<~MYYML
   ---
