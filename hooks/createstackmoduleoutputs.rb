@@ -22,6 +22,7 @@ CAPTUREFROMSTACK  = 'terraform-config-inspect --json'
 ENVNAME           = 'KITCHEN_SUITE_NAME'
 OUTPUTSTF         = './stackmodulesoutputs.tf'
 BANNER            = "# This file has been created automatically.\n\n"
+BANNERRB          = "# This file has been created automatically."
 INSPECYMLTMPLFILE = './test/integration/default/inspec.yml.tmpl'
 INSPECYMLTMPLSTR  = <<~MYYML
   ---
@@ -66,7 +67,7 @@ inspecYML   = File.open("./test/integration/#{myEnv}/inspec.yml", 'w')
 
 outputTF.write(BANNER)
 modoutTF.write(BANNER)
-allBPsRB.write(BANNER)
+allBPsRB.write(BANNERRB)
 inspecYML.write(BANNER)
 inspecYML.write(INSPECYMLHEAD)
 
@@ -136,7 +137,7 @@ uniqueBP.each do |name, count|
   # read the source/filename from the helper hash
   fileName  = moduleSources.select { |k, _v| k == name }[name]
 
-  # check if is repository and if it is a BI blueprint
+  # check if it is a repository and if it is a blueprint
   hasGit    = fileName.index('git::')
   hasGitRef = fileName.index('.git?ref')
   isBP      = fileName.index('blueprint')
