@@ -14,6 +14,8 @@
 # - ./test/fixtures/#{myEnv}/moduleoutputs.tf
 # - ./test/integration/#{myEnv}/controls/blueprints.rb
 # - ./test/integration/#{myEnv}/inspec.yml
+# It exits silently without any processing if file ./.noterraformstackmoduleoutputs exists.
+#
 
 require 'json'
 require 'open3'
@@ -34,6 +36,10 @@ INSPECYMLTMPLSTR  = <<~MYYML
       git: https://github.com/inspec/inspec-aws
       tag: v1.50.5
 MYYML
+
+if File.exist?('./.noterraformstackmoduleoutputs')
+  exit! 0
+end
 
 INSPECYMLHEAD = if File.exist?(INSPECYMLTMPLFILE)
                   File.read(INSPECYMLTMPLFILE)
@@ -170,12 +176,6 @@ inspecYML.close unless allBPsRB.nil?
 # pretty format modified tf files, so that a cyclic execution of terraform fmt is prohibited.
 TFFMT = 'terraform fmt'
 stdouttffmt, stderrtffmt, statustffmt = Open3.capture3(TFFMT)
-pp stdouttffmt
-pp stderrtffmt
-pp statustffmt
 
 TFFMTFIXTURES = "terraform fmt ./test/fixtures/#{myEnv}"
 stdouttffmtfixtures, stderrtffmtfixtures, statustffmtfixtures = Open3.capture3(TFFMTFIXTURES)
-pp stdouttffmtfixtures
-pp stderrtffmtfixtures
-pp statustffmtfixtures
