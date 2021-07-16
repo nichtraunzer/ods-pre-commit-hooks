@@ -58,7 +58,7 @@ CAPTUREFROMFIXTURE = "terraform-config-inspect ./test/fixtures/#{myEnv} --json"
 
 stdoutfixture, _stderrfixture, _statusfixture = Open3.capture3(CAPTUREFROMFIXTURE)
 
-CAPTUREFROMGIT = "basename $(git remote get-url origin) .git"
+CAPTUREFROMGIT = "basename $(git config --get remote.origin.url) .git"
 stdoutgit, _stderrgit, _statusgit = Open3.capture3(CAPTUREFROMGIT)
 if _statusgit.success?
   stackName = stdoutgit.strip
