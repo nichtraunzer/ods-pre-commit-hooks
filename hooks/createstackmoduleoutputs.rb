@@ -79,7 +79,7 @@ inspecYML.write(INSPECYMLHEAD)
 
 # get module section from main.json
 allModules = JSON.parse(stdout)['module_calls']
-allModulesfixtures = JSON.parse(stdoutfixture)['module_calls']
+allModulesfixtures = JSON.parse(stdoutfixture)['module_calls'].select{ |_, v| v if v['source'] == "../../.." or v['source'] == "../../../" }
 
 fixturemodulename = ''
 allModulesfixtures.each do |singlemodule|
