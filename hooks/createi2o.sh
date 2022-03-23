@@ -25,10 +25,12 @@ if [ -f "${TFHFILE}" ] ; then
     rm -f "${TFHFILE}"
 fi
 
-TFDOCSHCL=$(terraform-docs tfvars json "${CWD}" | jq -r 'keys[] as $k | "\($k) = var.\($k)"' | indenttfo )
+TFDOCSHCL=$(terraform-docs tfvars json "${CWD}" | jq -r 'with_entries(select(.key | contains("password") or contains ("secret") |not)) | keys[] as $k | "\($k) = var.\($k)"' | indenttfo )
 
 cat > "${TFHFILE}" <<EOF
 # This file has been created automatically.
+# terraform variables are passed to outputs.
+# Following variable names are skipped: '.*[password|secret].*'.
 
 output "inputs2outputs" {
   description = "all inputs passed to outputs"
