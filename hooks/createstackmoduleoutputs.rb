@@ -101,10 +101,6 @@ allModules.each do |singlemodule|
   moduleNames[moduleOut]  = moduleBP
   moduleSources[moduleBP] = fileName
   uniqueBP[moduleBP]     += 1
-
-  # create outputX.tf
-  outputTF.write("output \"module_#{moduleOut.gsub(/-/, '_')}\" {\n")
-  outputTF.write("  value = module.#{moduleValue}\n}\n")
 end
 
 # create moduleoutputs.tf
