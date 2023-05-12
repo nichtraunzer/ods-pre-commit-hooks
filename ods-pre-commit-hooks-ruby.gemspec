@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |s|
-  s.required_ruby_version = '~> 2.6', '< 4'
+  s.required_ruby_version = '> 2.6', '< 4'
   s.name = 'ods-pre-commit-hooks-ruby'
   s.version = '0.4.0'
 
