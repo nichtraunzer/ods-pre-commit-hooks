@@ -118,12 +118,10 @@ uniqueBP.each do |name, count|
   moduleNames.select { |_k, v| v == name }.each_key { |dup| duplicates << dup }
 
   if count == 1
-    moduleValue = "module.#{fixturemodulename}.module_#{duplicates[0].gsub(/-/, '_')}.*"
+    moduleValue = "module.#{fixturemodulename}.module_#{name.gsub(/-/, '_')}.*"
     moduleV2    = "module.#{duplicates[0]}.*"
   else
-    moduleValue = 'concat('
-    duplicates.each_index { |i| moduleValue += "module.#{fixturemodulename}.module_#{duplicates[i].gsub(/-/, '_')}.*," }
-    moduleValue = "#{moduleValue[0...-1]})"
+    moduleValue = "module.#{fixturemodulename}.module_#{name.gsub(/-/, '_')}.*"
 
     moduleV2 = 'concat('
     duplicates.each_index { |i| moduleV2 += "module.#{duplicates[i]}.*," }
