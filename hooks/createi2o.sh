@@ -37,6 +37,7 @@ output "inputs2outputs" {
   value = [{
 ${TFDOCSHCL}
   }]
+  sensitive = true
 }
 EOF
 terraform fmt "${CWD}"
