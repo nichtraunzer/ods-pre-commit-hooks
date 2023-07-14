@@ -110,7 +110,8 @@ stackOut = stackName.gsub(/-/, '_')
 # FIXME#stackValue = "module.#{stackOut}_default"
 
 modoutTF.write("output \"module_#{stackOut}\" {\n")
-modoutTF.write("  value = module.#{fixturemodulename}.*\n}\n")
+modoutTF.write("  value     = module.#{fixturemodulename}.*\n")
+modoutTF.write("  sensitive = true\n}\n")
 
 uniqueBP.each do |name, count|
   duplicates = []
@@ -130,11 +131,13 @@ uniqueBP.each do |name, count|
 
   moduleOut = name.gsub(/-/, '_')
   modoutTF.write("output \"module_#{moduleOut}\" {\n")
-  modoutTF.write("  value = #{moduleValue}\n}\n")
+  modoutTF.write("  value     = #{moduleValue}\n")
+  modoutTF.write("  sensitive = true\n}\n")
 
   # write stackmoduleoutputs.tf
   outputTF.write("output \"module_#{moduleOut.gsub(/-/, '_')}\" {\n")
-  outputTF.write("  value = #{moduleV2}\n}\n")
+  outputTF.write("  value     = #{moduleV2}\n")
+  outputTF.write("  sensitive = #{moduleV2}\n}\n")
 
   # read the source/filename from the helper hash
   fileName  = moduleSources.select { |k, _v| k == name }[name]
