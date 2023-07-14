@@ -137,7 +137,7 @@ uniqueBP.each do |name, count|
   # write stackmoduleoutputs.tf
   outputTF.write("output \"module_#{moduleOut.gsub(/-/, '_')}\" {\n")
   outputTF.write("  value     = #{moduleV2}\n")
-  outputTF.write("  sensitive = #{moduleV2}\n}\n")
+  outputTF.write("  sensitive = true\n}\n")
 
   # read the source/filename from the helper hash
   fileName  = moduleSources.select { |k, _v| k == name }[name]
